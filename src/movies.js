@@ -1,6 +1,7 @@
 // Iteration 1: All directors? - Get the array of all directors.
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors. How could you "clean" a bit this array and make it unified (without duplicates)?
 
+
 function getAllDirectors(array) {
 
     let newArray = array.map((movie) => movie.director);
@@ -70,12 +71,43 @@ function orderAlphabetically(array) {
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
 function turnHoursToMinutes(array){
-    let mutableArray = [...array];
+    let minutes = 0;
+    let mutableArray = array.slice();
     mutableArray.forEach((movie) =>{
-        let string = movie.duration;
-        let dividedString = string.split(" ");
-        
+        let duration = movie.duration;
+        let dividedString = duration.toString().split(" ");
+        console.log(dividedString);
+        if(dividedString[0].includes("h") && dividedString[1]){
+            minutes = (parseInt(dividedString[0]) * 60) + parseInt(dividedString[1]);
+        }else if(dividedString[0].includes("min")){
+            dividedString[0].replace("min", "");
+            minutes = parseInt(dividedString[0]);
+        }else{
+            minutes = parseInt(dividedString[0]) * 60;
+        }
+        movie.duration = minutes;
     })
+
+    return mutableArray;
 }
 
+
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
+
+function bestYearAvg(array){
+    if(!array.length) return null;
+    let years = {};
+    array.forEach((movie) =>{
+        if(!years.hasOwnProperty(movie.year)){
+            years[movie.year] = [];
+            years[movie.year].push(movie.rate);
+        }else{
+            years[movie.year].push(movie.rate);
+        }
+    })
+    
+
+}
+
+
+

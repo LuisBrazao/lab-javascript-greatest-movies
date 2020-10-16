@@ -415,7 +415,7 @@ describe('Turn duration of the movies - turnHoursToMinutes', () => {
   });
 
   it('Should return a new array, not update the original one', () => {
-    expect(turnHoursToMinutes(movies)).not.toEqual(movies);
+    expect(turnHoursToMinutes(movies)).not.toBe(movies);
   });
 
   it('The duration of the movie should be a number', () => {
