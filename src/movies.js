@@ -22,11 +22,11 @@ function howManyMovies(array) {
 function ratesAverage(array) {
     if (!array.length) return 0;
     let total = array.reduce((accumulator, currentValue) => {
-        if(!currentValue.rate){
+        if (!currentValue.rate) {
             currentValue.rate = 0;
         }
         return accumulator + currentValue.rate;
-}, 0);
+    }, 0);
     return +(total / array.length).toFixed(2);
 }
 
@@ -43,17 +43,24 @@ function dramaMoviesRate(array) {
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
 function orderByYear(array) {
-    array.sort((a, b) => a.year - b.year);
-    return array;
+    let newArray = array.sort((a, b) => {
+        if (a.year - b.year === 0) {
+            return a.title.localeCompare(b.title);
+        } else {
+            return a.year - b.year;
+        }
+    });
+    return [...newArray];
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 
 function orderAlphabetically(array) {
-    let sorted = array.sort((a, b) => a.title.localeCompare(b.title));
+    let mutableArray = [...array];
+    let sorted = mutableArray.sort((a, b) => a.title.localeCompare(b.title));
     let newArray = [];
     for (let i = 0; i < 20; i++) {
-        if (i < array.length) {
+        if (i < mutableArray.length) {
             newArray.push(sorted[i].title)
         }
     }
@@ -61,5 +68,14 @@ function orderAlphabetically(array) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
+
+function turnHoursToMinutes(array){
+    let mutableArray = [...array];
+    mutableArray.forEach((movie) =>{
+        let string = movie.duration;
+        let dividedString = string.split(" ");
+        
+    })
+}
 
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
